@@ -1,0 +1,290 @@
+
+<div class="covid-dashbpard-page-wrapper">
+
+    <div class="covid-dahboard-page"> 
+        <div class="covid-dahboard-wrapper left"> 
+          <div class="dashboard-header">
+              <div class="heading-box">        
+                  <h1>Covid-19 Prediction</h1> 
+                  <div class="inner-page-title-border"></div>
+              </div>    
+          </div>
+  
+          <div class="dashboard-body">
+              <form *ngIf="predictForm" [formGroup]="predictForm" (ngSubmit)="predictSubmit(predictForm.value, predictForm.valid)" #prForm="ngForm" novalidate>
+                  <div class="predict-form-row">
+                        <div class="predict-form-col"> 
+                          <div class="predict-form-col-inner"> 
+                              <div class="form-field-box">
+                                  <mat-form-field>
+                                      <mat-label>{{appConstant.predictForm.bodytemperatureLabel}}</mat-label>
+                                      <mat-select formControlName="{{appConstant.predictForm.bodytemperature}}" required>
+                                      <mat-option>--</mat-option>
+                                      <mat-option *ngFor="let data of predectionModel[appConstant.predictForm.bodytemperature]" [value]="data.value">
+                                          {{data.viewValue}}
+                                      </mat-option>
+                                      </mat-select>
+                                      <mat-error *ngIf="f[appConstant.predictForm.bodytemperature].hasError('required')">{{appConstant.errorMessageResources.general.required}}</mat-error>
+                                      
+                                  </mat-form-field>
+                              </div> 
+                          </div>    
+                        </div>
+  
+                        
+                          <div class="predict-form-col">
+                            <div class="predict-form-col-inner"> 
+                              <div class="form-field-box">
+                                  <mat-form-field>
+                                      <mat-label>{{appConstant.predictForm.feverdaysLabel}}</mat-label>
+                                      <mat-select formControlName="{{appConstant.predictForm.feverdays}}" required>
+                                          <mat-option>--</mat-option>
+                                          <mat-option *ngFor="let data of predectionModel[appConstant.predictForm.feverdays]" [value]="data">
+                                              {{data}}
+                                          </mat-option>
+                                      </mat-select>
+                                      <mat-error *ngIf="f[appConstant.predictForm.feverdays].hasError('required')">{{appConstant.errorMessageResources.general.required}}</mat-error>
+                                      
+                                      </mat-form-field>
+                              </div>     
+                            </div>
+                          </div>
+  
+                          <div class="predict-form-col">
+                              <div class="predict-form-col-inner"> 
+                                  <div class="form-field-box">
+                                      <mat-form-field>
+                                          <mat-label>{{appConstant.predictForm.coughdaysLabel}}</mat-label>
+                                          <mat-select formControlName="{{appConstant.predictForm.coughdays}}" required>
+                                          <mat-option>--</mat-option>
+                                          <mat-option *ngFor="let data of predectionModel[appConstant.predictForm.coughdays]" [value]="data">
+                                              {{data}}
+                                          </mat-option>
+                                          </mat-select>
+                                          <mat-error *ngIf="f[appConstant.predictForm.coughdays].hasError('required')">{{appConstant.errorMessageResources.general.required}}</mat-error>
+                                          
+                                      </mat-form-field>
+                                  </div>
+                              </div>
+                            </div>
+  
+                            <div class="predict-form-col">
+                              <div class="predict-form-col-inner"> 
+                                  <div class="label-box">
+                                      <label id="example-radio-group-label">{{appConstant.predictForm.travelhistoryLabel}}</label>
+                                  </div>
+                                  <div class="form-field-box">
+                                      <mat-radio-group color="primary"
+                                      aria-labelledby="example-radio-group-label"  class="example-radio-group" formControlName="{{appConstant.predictForm.travelhistory}}">
+                                      <mat-radio-button class="example-radio-button" *ngFor="let data of predectionModel[appConstant.predictForm.travelhistory]" [value]="data.value" name="{{appConstant.predictForm.travelhistory}}" >
+                                          {{data.viewValue}}
+                                      </mat-radio-button>
+                                      <mat-error *ngIf="f[appConstant.predictForm.travelhistory].hasError('required') && prForm.submitted">{{appConstant.errorMessageResources.general.required}}</mat-error>
+                                   </mat-radio-group>
+                                
+                                              
+                                  </div>     
+                              </div> 
+                            </div>
+                     
+                            <div class="predict-form-col">
+                              <div class="predict-form-col-inner"> 
+                                  <div class="form-field-box">
+                                      <mat-form-field>
+                                          <mat-label>{{appConstant.predictForm.ageLabel}}</mat-label>
+                                          <mat-select formControlName="{{appConstant.predictForm.age}}" required>
+                                          <mat-option>--</mat-option>
+                                          <mat-option *ngFor="let data of predectionModel[appConstant.predictForm.age]" [value]="data.value">
+                                              {{data.viewValue}}
+                                          </mat-option>
+                                          </mat-select>
+                                          <mat-error *ngIf="f[appConstant.predictForm.age].hasError('required')">{{appConstant.errorMessageResources.general.required}}</mat-error>
+                                          
+                                      </mat-form-field>
+                                  </div>
+                              </div>
+                            </div>
+  
+                            
+                            <div class="predict-form-col">
+                              <div class="predict-form-col-inner"> 
+                                  <div class="label-box">
+                                      <label id="example-radio-group-label">{{appConstant.predictForm.medicalailmentLabel}}</label>
+                                  </div>
+                                  <div class="form-field-box">
+                                      <mat-radio-group color="primary"
+                                      aria-labelledby="example-radio-group-label"  class="example-radio-group" formControlName="{{appConstant.predictForm.medicalailment}}">
+                                      <mat-radio-button class="example-radio-button" *ngFor="let data of predectionModel[appConstant.predictForm.medicalailment]" [value]="data.value">
+                                          {{data.viewValue}}
+                                      </mat-radio-button>
+                                      <mat-error *ngIf="f[appConstant.predictForm.medicalailment].hasError('required') && prForm.submitted">{{appConstant.errorMessageResources.general.required}}</mat-error>
+                                   </mat-radio-group>                              
+                                              
+                                  </div>     
+                              </div> 
+                            </div>
+          
+                        
+                  </div>
+                  <div class="predict-form-btn-block">                    
+                      <button type="submit" mat-raised-button color="primary" [disabled]="!predictForm.valid">Submit</button>
+                      <button type="reset" mat-raised-button color="default" (click)="predictReset()">Reset</button>
+                    </div>
+                  </form>
+  
+                  <div class="prediction-box" *ngIf="predictedData.description">
+                      <div id="chartContainer"></div>
+                      <div class="prediction-text">
+                        <blockquote class="blockquote" [ngClass]="predictedData.blockquoteClass ? predictedData.blockquoteClass: ''">
+                            <p class="bq-title">{{predictedData.title}}</p>
+                            <p>Your chances of having Covid , based on parameters shared is : <strong>{{predictedData.value}}%</strong>. {{predictedData.description}}
+                            </p>
+                        </blockquote></div>
+                  </div>
+          </div>
+         
+      </div>
+  </div>
+
+
+<div class="covid-dahboard-page"> 
+    <div class="covid-dahboard-wrapper right"> 
+      <div class="dashboard-header">
+          <div class="heading-box">        
+              <h1>Covid-19 Panic Buying Prediction</h1> 
+              <div class="inner-page-title-border"></div>
+          </div>    
+      </div>
+
+      <div class="dashboard-body">
+          <form *ngIf="panicPredictForm" [formGroup]="panicPredictForm" (ngSubmit)="panicPredictSubmit(panicPredictForm.value, panicPredictForm.valid)" novalidate>
+              <div class="predict-form-row">
+                    <div class="predict-form-col"> 
+                      <div class="predict-form-col-inner"> 
+                          <div class="form-field-box">
+                              <mat-form-field>
+                                  <mat-label>{{appConstant.panicPredictForm.onionquantityLabel}}</mat-label>
+                                  <mat-select formControlName="{{appConstant.panicPredictForm.onionquantity}}" required>
+                                  <mat-option>--</mat-option>
+                                  <mat-option *ngFor="let data of panicPredictionModel[appConstant.panicPredictForm.onionquantity]" [value]="data">
+                                      {{data}}
+                                  </mat-option>
+                                  </mat-select>
+                                  <mat-error *ngIf="pf[appConstant.panicPredictForm.onionquantity].hasError('required')">{{appConstant.errorMessageResources.general.required}}</mat-error>
+                                  
+                              </mat-form-field>
+                          </div> 
+                      </div>    
+                    </div>
+
+                    
+                      <div class="predict-form-col">
+                        <div class="predict-form-col-inner"> 
+                          <div class="form-field-box">
+                              <mat-form-field>
+                                  <mat-label>{{appConstant.panicPredictForm.tomatoquantityLabel}}</mat-label>
+                                  <mat-select formControlName="{{appConstant.panicPredictForm.tomatoquantity}}" required>
+                                      <mat-option>--</mat-option>
+                                      <mat-option *ngFor="let data of panicPredictionModel[appConstant.panicPredictForm.tomatoquantity]" [value]="data">
+                                          {{data}}
+                                      </mat-option>
+                                  </mat-select>
+                                  <mat-error *ngIf="pf[appConstant.panicPredictForm.tomatoquantity].hasError('required')">{{appConstant.errorMessageResources.general.required}}</mat-error>
+                                  
+                                  </mat-form-field>
+                          </div>     
+                        </div>
+                      </div>
+
+                      <div class="predict-form-col">
+                          <div class="predict-form-col-inner"> 
+                              <div class="form-field-box">
+                                  <mat-form-field>
+                                      <mat-label>{{appConstant.panicPredictForm.breadquantityLabel}}</mat-label>
+                                      <mat-select formControlName="{{appConstant.panicPredictForm.breadquantity}}" required>
+                                      <mat-option>--</mat-option>
+                                      <mat-option *ngFor="let data of panicPredictionModel[appConstant.panicPredictForm.breadquantity]" [value]="data">
+                                          {{data}}
+                                      </mat-option>
+                                      </mat-select>
+                                      <mat-error *ngIf="pf[appConstant.panicPredictForm.breadquantity].hasError('required')">{{appConstant.errorMessageResources.general.required}}</mat-error>
+                                      
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                        </div>
+
+                        <div class="predict-form-col">
+                            <div class="predict-form-col-inner"> 
+                                <div class="form-field-box">
+                                    <mat-form-field>
+                                        <mat-label>{{appConstant.panicPredictForm.ricequantityLabel}}</mat-label>
+                                        <mat-select formControlName="{{appConstant.panicPredictForm.ricequantity}}" required>
+                                        <mat-option>--</mat-option>
+                                        <mat-option *ngFor="let data of panicPredictionModel[appConstant.panicPredictForm.ricequantity]" [value]="data">
+                                            {{data}}
+                                        </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="pf[appConstant.panicPredictForm.ricequantity].hasError('required')">{{appConstant.errorMessageResources.general.required}}</mat-error>
+                                        
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                          </div>
+                 
+                        <div class="predict-form-col">
+                          <div class="predict-form-col-inner"> 
+                              <div class="form-field-box">
+                                  <mat-form-field>
+                                      <mat-label>{{appConstant.panicPredictForm.dhalquantityLabel}}</mat-label>
+                                      <mat-select formControlName="{{appConstant.panicPredictForm.dhalquantity}}" required>
+                                      <mat-option>--</mat-option>
+                                      <mat-option *ngFor="let data of panicPredictionModel[appConstant.panicPredictForm.dhalquantity]" [value]="data">
+                                          {{data}}
+                                      </mat-option>
+                                      </mat-select>
+                                      <mat-error *ngIf="pf[appConstant.panicPredictForm.dhalquantity].hasError('required')">{{appConstant.errorMessageResources.general.required}}</mat-error>
+                                      
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                        </div>
+
+                        
+                        <div class="predict-form-col">
+                            <div class="predict-form-col-inner"> 
+                                <div class="form-field-box">
+                                    <mat-form-field>
+                                        <mat-label>{{appConstant.panicPredictForm.personcountLabel}}</mat-label>
+                                        <mat-select formControlName="{{appConstant.panicPredictForm.personcount}}" required>
+                                        <mat-option>--</mat-option>
+                                        <mat-option *ngFor="let data of panicPredictionModel[appConstant.panicPredictForm.personcount]" [value]="data">
+                                            {{data}}
+                                        </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="pf[appConstant.panicPredictForm.personcount].hasError('required')">{{appConstant.errorMessageResources.general.required}}</mat-error>
+                                        
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                          </div>
+                    
+              </div>
+              <div class="predict-form-btn-block">                    
+                  <button type="submit" mat-raised-button color="primary" [disabled]="!panicPredictForm.valid">Submit</button>
+                  <button type="reset" mat-raised-button color="default" (click)="panicPredictReset()">Reset</button>
+                </div>
+              </form>
+
+              <div class="prediction-box" *ngIf="panicPredictedData.description">               
+                <div class="prediction-text">
+                  <blockquote class="blockquote" [ngClass]="panicPredictedData.blockquoteClass ? panicPredictedData.blockquoteClass: ''">
+                      <p class="bq-title">{{panicPredictedData.title}}</p>
+                      <p>{{panicPredictedData.description}}</p>
+                  </blockquote></div>
+            </div>
+      </div>
+     
+  </div>
+</div>
+</div>

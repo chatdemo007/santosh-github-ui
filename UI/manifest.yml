@@ -1,0 +1,6 @@
+---
+    applications:
+     - name: community
+       random-route: true
+       memory: 156M
+    
